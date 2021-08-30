@@ -2,27 +2,27 @@
   <div class="row">
     <div class='col-1'></div>
     <div class="col-10">
-       <h1 class="text-center">Lista de nominas</h1>
+      <h1 class="text-center">Crear Nomina</h1>
        <el-card class="box-card">
-        <list-nomina class="container" />
-       </el-card>
+            <form-nomina class="container" :method="method" />
+        </el-card>
     </div>
     <div class='col-1'></div>
   </div>
 </template>
 
 <script>
-import ListNomina from "../components/ListNomina";
+import FormNomina from "../components/FormNomina";
 export default {
-  name: "Nominas",
+  name: "CreateNomina",
 
   components: {
-    ListNomina,
+    FormNomina,
   },
   props: {},
   data() {
     return {
-        employees: [],
+        method:'create'
     };
   },
   methods: {

@@ -8,7 +8,23 @@ const routes = [
   {
     path: '/',
     name: 'Nominas',
-    component: () => import(/* webpackChunkName: "Nominas" */ '../views/Nominas.vue')  },
+    component: () => import(/* webpackChunkName: "Nominas" */ '../views/Nominas.vue')  
+  },
+  {
+    path: '/nomina/create',
+    name: 'Nominas',
+    component: () => import(/* webpackChunkName: "CrearNomina" */ '../views/CreateNomina.vue')  
+  },
+  {
+    path: '/nomina/edit/:id',
+    name: 'Nominas',
+    component: () => import(/* webpackChunkName: "EditarNomina" */ '../views/EditNomina.vue')  
+  },
+  {
+    path: '/nomina/:id',
+    name: 'Nominas',
+    component: () => import(/* webpackChunkName: "VerNomina" */ '../views/ViewNomina.vue')  
+  },
   {
     path: '/about',
     name: 'About',

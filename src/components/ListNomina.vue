@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center">Lista de nominas</h1>
-      <el-button type="primary" class="">Crear Nomina</el-button>
+      <el-button type="primary" @click="createNomina">Crear Nomina</el-button>
     <DxDataGrid
       :data-source="dataSource"
       key-expr="id"
@@ -60,6 +59,9 @@
         <el-dropdown size='small' split button type='primary'>
           <span>Opciones</span>
           <el-dropdown-menu>
+            <a @click="viewNomina(data.row.data.id)" >
+              <el-dropdown-item>Ver</el-dropdown-item>
+            </a>
             <a @click="editNomina(data.row.data.id)" >
               <el-dropdown-item>Editar</el-dropdown-item>
             </a>
@@ -108,6 +110,9 @@ export default {
     this.getNominas();
   },
   methods:{
+    createNomina(){
+      this.$router.push('/nomina/create')
+    },
      getNominas() {
       axios
         .get("http://localhost/Nomina/public/api/employee")
@@ -115,8 +120,11 @@ export default {
             this.dataSource = response.data.employees
         });
     },
-    editNomina(data){
-      console.log(data);
+    editNomina(id){
+      this.$router.push(`/nomina/edit/${id}`)
+    },
+     viewNomina(id){
+      this.$router.push(`/nomina/${id}`)
     },
     deleteNomina(data){
       this.$confirm('Estas seguro de eliminar esta nomina?', 'Alerta', {
@@ -126,14 +134,14 @@ export default {
         }).then(() => {
 
           axios
-        .delete(`http://localhost/Nomina/public/api/employee/${data}`)
-        .then((response) => {
-            console.log(response)
-            this.getNominas();
-            this.$message({
-            type: 'success',
-            message: 'Se elimino con exito!!'
-          });
+            .delete(`http://localhost/Nomina/public/api/employee/${data}`)
+            .then((response) => {
+                console.log(response)
+                this.getNominas();
+                this.$message({
+                type: 'success',
+                message: 'Se elimino con exito!!'
+              });
         });
         }).catch(() => {
           this.$message({
